@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Projekt2</string>
+    <string name="submit">Submit</string>
+    <string name="settings">Settings</string>
+    <string name="object_type">Object type</string>
+    <string name="rectangle">Rectangle</string>
+    <string name="triangle">Triangle</string>
+    <string name="object_size">Object size</string>
+    <string name="small">small</string>
+    <string name="medium">medium</string>
+    <string name="large">large</string>
+    <string name="rotation_direction">Rotation direction</string>
+    <string name="right">right</string>
+    <string name="left">left</string>
+    <string name="rotation_speed">Rotation speed</string>
+    <string name="slow">slow</string>
+    <string name="normal">normal</string>
+    <string name="fast">fast</string>
+    <string name="star">Star</string>
+</resources>
