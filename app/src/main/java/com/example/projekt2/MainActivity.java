@@ -20,52 +20,68 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    int[] objects = {R.drawable.questionmark, R.drawable.rectangle, R.drawable.triangle, R.drawable.star};    // {rectangle, triangle}
+    /* {rectangle, triangle} */
+    private int[] objects = {R.drawable.questionmark, R.drawable.rectangle, R.drawable.triangle, R.drawable.star};
 
-    int[] objectSize = {200, 400, 600};                             // {small, medium , large}
+    /* {small, medium , large} */
+    private int[] objectSize = {200, 400, 600};
 
-    int[] objectSpeed = {5000, 2500, 1250};                         // {slow, normal, fast}
+    /* {slow, normal, fast} */
+    private int[] objectSpeed = {5000, 2500, 1250};
 
-    int[] objectDirection = {360,-360};                             // {right,left}
+    /* {right,left} */
+    private int[] objectDirection = {360,-360};
 
-    RotateAnimation rotate;
+    /**
+     * This Function sets the values for the rotating object and starts the animation.
+     * @param i
+     */
+    public void setAndStartRotatingObject(Intent i){
+        int[] values = new int[4];
+        values[0] = i.getIntExtra("object type", 0);
+        values[1] = i.getIntExtra("object size", 0);
+        values[2] = i.getIntExtra("object direction",0);
+        values[3] = i.getIntExtra("object speed",0);
+
+        ImageView imageView = (ImageView) findViewById(R.id.imageView);
+
+        imageView.setImageResource(objects[values[0]]);
+        imageView.getLayoutParams().width = objectSize[values[1]];
+
+        RotateAnimation rotate = new RotateAnimation(
+                0, objectDirection[values[2]],
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f);
+        rotate.setDuration(objectSpeed[values[3]]);
+        rotate.setInterpolator(new LinearInterpolator());
+        rotate.setRepeatCount(Animation.INFINITE);
+
+        imageView.startAnimation(rotate);
+        
+    }
+
+    /**
+     * This function starts the SettingsActivity.
+     * @param view
+     */
+    public void goToSettings(View view){
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
 
+        /* Fullscreen for MainActivity */
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_main);
 
         Intent i = getIntent();
+        setAndStartRotatingObject(i);
 
-        int object_type = i.getIntExtra("object type", 0);
-        int object_size = i.getIntExtra("object size", 0);
-        int object_direction = i.getIntExtra("object direction",0);
-        int object_speed = i.getIntExtra("object speed",0);
-
-        ImageView imageView = (ImageView) findViewById(R.id.imageView);
-
-        imageView.setImageResource(objects[object_type]);
-        imageView.getLayoutParams().width = objectSize[object_size];
-
-        rotate = new RotateAnimation(
-                0, objectDirection[object_direction],
-                Animation.RELATIVE_TO_SELF, 0.5f,
-                Animation.RELATIVE_TO_SELF, 0.5f);
-        rotate.setDuration(objectSpeed[object_speed]);
-        rotate.setInterpolator(new LinearInterpolator());
-        rotate.setRepeatCount(Animation.INFINITE);
-        imageView.startAnimation(rotate);
     }
-
-    public void goToSettings(View view){
-        Intent intent = new Intent(this, SettingsActivity.class);
-        startActivity(intent);
-    }
-
-
 }

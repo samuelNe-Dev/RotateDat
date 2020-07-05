@@ -16,28 +16,39 @@ import android.widget.Toast;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    int objectsIndex = 0;
-    int objectSizeIndex = 0;
-    int objectSpeedIndex = 0;
-    int objectDirectionIndex = 0;
+    /* Initial values for the rotating Object, when starting the app */
+    private int objectsIndex = 0;
+    private int objectSizeIndex = 0;
+    private int objectSpeedIndex = 0;
+    private int objectDirectionIndex = 0;
 
+    /**
+     * This function checks if the user chose a Radiobutton for every Radiogroup.
+     * @return
+     */
     public boolean checkIfSelectionMissing(){
         RadioGroup r1 = (RadioGroup) findViewById(R.id.radioGroupObjects);
         RadioGroup r2 = (RadioGroup) findViewById(R.id.radioGroupSize);
         RadioGroup r3 = (RadioGroup) findViewById(R.id.radioGroupDirection);
         RadioGroup r4 = (RadioGroup) findViewById(R.id.radioGroupSpeed);
-        // radio buttons aren't checked
+
+        /* RadioButtons aren't checked */
         if((r1.getCheckedRadioButtonId() == -1)||(r2.getCheckedRadioButtonId() == -1)||
         (r3.getCheckedRadioButtonId() == -1)||(r4.getCheckedRadioButtonId() == -1)){
             return true;
         }
         return false;
     }
+
+    /**
+     * This function starts the MainActivity.
+     * @param view
+     */
     public void goToMainActivity(View view){
         if(checkIfSelectionMissing()){
             Toast.makeText(this, "Please give a selection for every attribute!", Toast.LENGTH_SHORT).show();
         }
-        // one of the radio buttons is checked
+        /* one of the radio buttons is checked */
         else{
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("object type", objectsIndex);
@@ -48,6 +59,10 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This function sets the values for the rotating object.
+     * @param view
+     */
     public void setRotatingObject(View view){
         RadioButton radioButton = (RadioButton) view;
 
@@ -95,6 +110,7 @@ public class SettingsActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
 
+        /* Fullscreen for SettingsActivity */
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_settings);

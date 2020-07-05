@@ -17,4 +17,10 @@
     <string name="normal">normal</string>
     <string name="fast">fast</string>
     <string name="star">Star</string>
+    <string name="rotate_dat">Rotate Dat</string>
+    <string name="go_ahead_and_choose_your_own_setting">Go ahead and choose your own setting!</string>
+    <string name="go_to_settings">Go to Settings</string>
+    <string name="go_to_settings">Go to Settings</string>
+    <string name="go_ahead_and_choose_your_own_setting">Go ahead and choose your own setting!</string>
+    <string name="rotate_dat">Rotate Dat</string>
 </resources>
